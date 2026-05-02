@@ -1,178 +1,344 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الهندسة المعقدة - NEXUS (ملف واحد)</title>
+    <title>أسئلة الاجتماعيات - النسخة ج (مؤمنة)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Core Global Styles */
         body {
-            margin: 0;
-            overflow: hidden; /* Hide scrollbars for full-screen effect */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #0a0a0e; /* Deep space background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            perspective: 1500px; /* Establish 3D perspective for the scene */
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background-color: #ecfdf5;
         }
-
-        /* Geometric Nexus Container */
-        .geometric-nexus {
-            position: relative;
-            width: 600px; /* Overall size of the geometric structure */
-            height: 600px;
-            transform-style: preserve-3d; /* Allows nested elements to participate in 3D transforms */
-            animation: rotateNexus 30s infinite linear; /* Slow, continuous rotation of the entire structure */
+        .exam-paper {
+            background-color: #ffffff;
+            background-image: repeating-linear-gradient(45deg, #f0fdf4 25%, transparent 25%, transparent 75%, #f0fdf4 75%, #f0fdf4), repeating-linear-gradient(45deg, #f0fdf4 25%, #ffffff 25%, #ffffff 75%, #f0fdf4 75%, #f0fdf4);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
         }
-
-        /* Animation for the entire Nexus */
-        @keyframes rotateNexus {
-            from { transform: rotateY(0deg) rotateX(0deg); }
-            to { transform: rotateY(360deg) rotateX(360deg); }
+        @media print {
+            body { background-color: white; }
+            .no-print { display: none !important; }
+            .print-break { page-break-before: always; }
+            .exam-container { box-shadow: none !important; border: 2px solid #064e3b !important; background-image: none !important; }
         }
-
-        /* Base Layer Styling */
-        .layer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-style: preserve-3d;
-            transform: translate(-50%, -50%); /* Center the layers */
-            width: var(--size, 200px); /* Custom property for size */
-            height: var(--size, 200px);
-            border: 1px solid rgba(0, 255, 255, 0.2); /* Cyan border for a futuristic look */
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4); /* Glowing effect */
-            background: var(--bg-gradient, linear-gradient(45deg, rgba(0, 200, 200, 0.1), rgba(0, 0, 0, 0.3)));
-            animation: pulseBorder 4s infinite ease-in-out alternate;
+        .question-number {
+            color: #047857;
+            font-weight: 900;
         }
-
-        /* Border pulse animation */
-        @keyframes pulseBorder {
-            0% { border-color: rgba(0, 255, 255, 0.2); box-shadow: 0 0 15px rgba(0, 255, 255, 0.4); }
-            100% { border-color: rgba(0, 255, 255, 0.6); box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(0, 200, 200, 0.6); }
-        }
-
-        /* Individual Layer Specifics */
-
-        /* Layer 1: Core, large, slow rotation */
-        .layer-1 {
-            --size: 550px;
-            --bg-gradient: conic-gradient(from 0deg at 50% 50%, rgba(0, 255, 255, 0.1), transparent 30%, rgba(0, 100, 200, 0.1), transparent 70%);
-            transform: translate(-50%, -50%) rotateZ(0deg) rotateX(60deg) rotateY(0deg);
-            animation: rotateLayer1 40s infinite linear reverse, pulseBorder 5s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer1 {
-            from { transform: translate(-50%, -50%) rotateZ(0deg) rotateX(60deg) rotateY(0deg); }
-            to { transform: translate(-50%, -50%) rotateZ(360deg) rotateX(60deg) rotateY(360deg); }
-        }
-
-
-        /* Layer 2: Medium size, faster rotation, diamond shape */
-        .layer-2 {
-            --size: 450px;
-            --bg-gradient: linear-gradient(135deg, rgba(0, 220, 220, 0.15), rgba(0, 0, 0, 0.4));
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shape */
-            transform: translate(-50%, -50%) rotateZ(45deg) rotateX(-30deg) rotateY(20deg) scale(0.9);
-            animation: rotateLayer2 25s infinite linear, pulseBorder 4.5s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer2 {
-            from { transform: translate(-50%, -50%) rotateZ(45deg) rotateX(-30deg) rotateY(20deg) scale(0.9); }
-            to { transform: translate(-50%, -50%) rotateZ(405deg) rotateX(330deg) rotateY(380deg) scale(0.9); }
-        }
-
-
-        /* Layer 3: Smaller, skewed rectangle */
-        .layer-3 {
-            --size: 380px;
-            --bg-gradient: linear-gradient(to right, rgba(0, 150, 255, 0.1), rgba(0, 255, 255, 0.15));
-            transform: translate(-50%, -50%) rotateY(70deg) rotateX(10deg) skewX(20deg) translateZ(-50px); /* Z-index for depth */
-            animation: rotateLayer3 18s infinite ease-in-out alternate-reverse, pulseBorder 3.8s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer3 {
-            from { transform: translate(-50%, -50%) rotateY(70deg) rotateX(10deg) skewX(20deg) translateZ(-50px); }
-            to { transform: translate(-50%, -50%) rotateY(430deg) rotateX(-10deg) skewX(-20deg) translateZ(-50px); }
-        }
-
-
-        /* Layer 4: Smaller, faster, square with gradient */
-        .layer-4 {
-            --size: 300px;
-            --bg-gradient: radial-gradient(circle at center, rgba(0, 255, 255, 0.2), rgba(0, 50, 100, 0.3));
-            transform: translate(-50%, -50%) rotateX(-90deg) rotateY(45deg) translateZ(-100px);
-            animation: rotateLayer4 12s infinite linear, pulseBorder 3.5s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer4 {
-            from { transform: translate(-50%, -50%) rotateX(-90deg) rotateY(45deg) translateZ(-100px); }
-            to { transform: translate(-50%, -50%) rotateX(270deg) rotateY(405deg) translateZ(-100px); }
-        }
-
-
-        /* Layer 5: Smallest, cross shape with clip-path */
-        .layer-5 {
-            --size: 200px;
-            --bg-gradient: linear-gradient(90deg, transparent 45%, rgba(0, 255, 255, 0.3) 45%, rgba(0, 255, 255, 0.3) 55%, transparent 55%),
-                           linear-gradient(0deg, transparent 45%, rgba(0, 255, 255, 0.3) 45%, rgba(0, 255, 255, 0.3) 55%, transparent 55%);
-            clip-path: polygon(40% 0%, 60% 0%, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0% 60%, 0% 40%, 40% 40%); /* Cross shape */
-            transform: translate(-50%, -50%) rotateX(120deg) rotateY(-50deg) translateZ(50px) scale(0.8);
-            animation: rotateLayer5 10s infinite ease-in-out, pulseBorder 3s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer5 {
-            from { transform: translate(-50%, -50%) rotateX(120deg) rotateY(-50deg) translateZ(50px) scale(0.8); }
-            to { transform: translate(-50%, -50%) rotateX(480deg) rotateY(310deg) translateZ(50px) scale(0.8); }
-        }
-
-        /* Layer 6: Thin Ring / Border */
-        .layer-6 {
-            --size: 580px;
-            background: transparent;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            border-radius: 50%; /* Makes it a circle */
-            transform: translate(-50%, -50%) rotateY(90deg) rotateX(30deg) translateZ(-150px);
-            animation: rotateLayer6 20s infinite linear reverse, pulseBorder 4.2s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer6 {
-            from { transform: translate(-50%, -50%) rotateY(90deg) rotateX(30deg) translateZ(-150px); }
-            to { transform: translate(-50%, -50%) rotateY(450deg) rotateX(390deg) translateZ(-150px); }
-        }
-
-        /* Layer 7: Outermost, subtle background grid effect */
-        .layer-7 {
-            --size: 650px;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0, 255, 255, 0.05),
-                rgba(0, 255, 255, 0.05) 10px,
-                transparent 10px,
-                transparent 20px
-            ), repeating-linear-gradient(
-                -45deg,
-                rgba(0, 255, 255, 0.05),
-                rgba(0, 255, 255, 0.05) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            border: none;
-            box-shadow: none;
-            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) translateZ(-200px); /* Deepest layer */
-            animation: rotateLayer7 60s infinite linear, pulseBorder 6s infinite ease-in-out alternate;
-        }
-        @keyframes rotateLayer7 {
-            from { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) translateZ(-200px); }
-            to { transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg) translateZ(-200px); }
+        /* تصميم النافذة المنبثقة للرقم السري */
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
         }
     </style>
 </head>
-<body>
-    <div class="geometric-nexus">
-        <div class="layer layer-1"></div>
-        <div class="layer layer-2"></div>
-        <div class="layer layer-3"></div>
-        <div class="layer layer-4"></div>
-        <div class="layer layer-5"></div>
-        <div class="layer layer-6"></div>
-        <div class="layer layer-7"></div>
+<body class="py-10 px-4 text-gray-900">
+
+    <!-- شريط التحكم -->
+    <div class="max-w-4xl mx-auto mb-6 flex flex-wrap gap-4 justify-between items-center no-print">
+        <button onclick="window.print()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition duration-300 flex items-center">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            طباعة الأسئلة
+        </button>
+        <button onclick="openAuthModal()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition duration-300 flex items-center">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            لوحة المصحح (الأجوبة)
+        </button>
     </div>
+
+    <!-- النافذة المنبثقة لإدخال الرمز السري (مخفية افتراضياً) -->
+    <div id="authModal" class="fixed inset-0 modal-bg flex items-center justify-center z-50 hidden no-print">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center border-t-4 border-emerald-600 transform transition-all">
+            <div class="mb-4 text-emerald-600">
+                <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2 font-['Tajawal']">منطقة مقيدة</h3>
+            <p class="text-gray-500 mb-6 text-sm">الرجاء إدخال رمز المصحح السري لعرض الأجوبة النموذجية.</p>
+            
+            <input type="password" id="secretCodeInput" class="w-full text-center text-2xl tracking-[0.5em] border-2 border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 rounded-lg p-3 mb-4 outline-none transition" placeholder="••••" maxlength="4">
+            
+            <p id="errorMsg" class="text-red-500 text-sm font-bold mb-4 hidden">الرمز غير صحيح، حاول مجدداً.</p>
+            
+            <div class="flex gap-3">
+                <button onclick="closeAuthModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 rounded-lg transition">إلغاء</button>
+                <button onclick="verifyCode()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg transition">تأكيد الرمز</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ورقة الامتحان -->
+    <div class="exam-container max-w-4xl mx-auto border-4 border-emerald-900 p-8 shadow-2xl relative exam-paper rounded-xl">
+        
+        <!-- الترويسة -->
+        <div class="flex flex-col md:flex-row justify-between items-center border-b-4 border-emerald-900 pb-4 mb-8 text-center md:text-right">
+            <div class="mb-4 md:mb-0 w-full md:w-1/3 leading-relaxed font-bold text-emerald-950">
+                جمهورية العراق<br>
+                وزارة التربية<br>
+                اللجنة الدائمة للامتحانات
+            </div>
+            <div class="mb-4 md:mb-0 w-full md:w-1/3 text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Emblem_of_Iraq.svg/100px-Emblem_of_Iraq.svg.png" alt="شعار الجمهورية" class="h-16 mx-auto mb-2 grayscale opacity-90">
+                <h1 class="font-black text-2xl md:text-3xl text-emerald-900 tracking-wide">الامتحان التأكيدي (النسخة ج)</h1>
+                <h2 class="font-bold text-lg text-emerald-800 mt-1">مادة الاجتماعيات - السادس الابتدائي</h2>
+            </div>
+            <div class="w-full md:w-1/3 md:text-left leading-relaxed font-bold text-emerald-950">
+                الموضوع: من دهوك لغاية نينوى<br>
+                الوقت المخصص: ساعتان<br>
+                الدرجة الكلية: (100 درجة)
+            </div>
+        </div>
+
+        <!-- ملاحظة -->
+        <div class="text-center font-bold text-lg bg-emerald-100 py-3 border-2 border-emerald-300 rounded mb-8 shadow-sm">
+            ملاحظة: أجب عن (خمسة) أسئلة فقط، ولكل سؤال (20) درجة.
+        </div>
+
+        <!-- الأسئلة -->
+        <div class="space-y-8 text-lg font-medium text-slate-900">
+            
+            <!-- السؤال الأول -->
+            <div class="relative bg-white/90 p-4 rounded-lg border border-emerald-100 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-bold text-xl flex items-center"><span class="question-number text-2xl ml-2">س1/</span> عّرف خمسة مما يأتي:</h3>
+                    <span class="text-sm font-bold text-emerald-700 border border-emerald-300 px-3 py-1 rounded bg-white shadow-sm">(20 درجة)</span>
+                </div>
+                <div class="pr-8 grid grid-cols-2 md:grid-cols-3 gap-5 font-bold text-emerald-950">
+                    <p>1- الزاب الكبير</p>
+                    <p>2- قلعة العمادية</p>
+                    <p>3- حصاروست</p>
+                    <p>4- دور شروكين (خرسباد)</p>
+                    <p>5- سهل مخمور</p>
+                    <p>6- موقع نمريك</p>
+                </div>
+            </div>
+
+            <!-- السؤال الثاني -->
+            <div class="relative bg-white/90 p-4 rounded-lg border border-emerald-100 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-bold text-xl flex items-center"><span class="question-number text-2xl ml-2">س2/</span> املأ الفراغات الآتية بما يناسبها (لخمسٍ فقط):</h3>
+                    <span class="text-sm font-bold text-emerald-700 border border-emerald-300 px-3 py-1 rounded bg-white shadow-sm">(20 درجة)</span>
+                </div>
+                <div class="pr-8 space-y-4 leading-relaxed font-semibold">
+                    <p>1- تمثل سلسلة جبال ..................... الحدود الفاصلة بين العراق وإيران.</p>
+                    <p>2- من أهم الموارد المائية السطحية في محافظة السليمانية نهر الزاب الصغير ونهر .....................</p>
+                    <p>3- تعد مدينة ..................... العاصمة الدينية للآشوريين واسم إلههم الرئيس.</p>
+                    <p>4- مناخ السهوب هو مناخ انتقالي بين مناخ البحر المتوسط شمالاً والمناخ ..................... جنوباً.</p>
+                    <p>5- من أشهر جبال محافظة أربيل جبل سفين وجبل .....................</p>
+                    <p>6- تتكون تضاريس محافظة دهوك من منطقتين هما منطقة الجبال ومنطقة .....................</p>
+                </div>
+            </div>
+
+            <!-- السؤال الثالث -->
+            <div class="relative bg-white/90 p-4 rounded-lg border border-emerald-100 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-bold text-xl flex items-center"><span class="question-number text-2xl ml-2">س3/</span> ضع كلمة (صح) أمام العبارة الصحيحة وكلمة (خطأ) أمام العبارة غير الصحيحة (لخمسٍ فقط):</h3>
+                    <span class="text-sm font-bold text-emerald-700 border border-emerald-300 px-3 py-1 rounded bg-white shadow-sm">(20 درجة)</span>
+                </div>
+                <div class="pr-8 space-y-4 font-semibold">
+                    <p>1- تتنوع الموارد المائية في نينوى بين مياه سطحية ومياه عيون وينابيع. ( )</p>
+                    <p>2- يقع سد دربندخان على نهر الزاب الصغير. ( )</p>
+                    <p>3- تقع محافظة أربيل في شمال وطننا العراق وتحدها تركيا من الشمال. ( )</p>
+                    <p>4- أسس الملك الآشوري شلمنصر الأول مدينة نمرود (كالح). ( )</p>
+                    <p>5- اقتصرت الموارد المائية في محافظة دهوك على المياه الجوفية فقط. ( )</p>
+                    <p>6- من أهم مصايف محافظة أربيل مصيف سرسنك ومصيف سولاف. ( )</p>
+                </div>
+            </div>
+
+            <!-- السؤال الرابع -->
+            <div class="relative bg-white/90 p-4 rounded-lg border border-emerald-100 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-bold text-xl flex items-center"><span class="question-number text-2xl ml-2">س4/</span> أجب عن فرعين فقط:</h3>
+                    <span class="text-sm font-bold text-emerald-700 border border-emerald-300 px-3 py-1 rounded bg-white shadow-sm">(20 درجة)</span>
+                </div>
+                <div class="pr-8 space-y-6">
+                    <div>
+                        <p class="font-bold mb-3 text-emerald-900 border-r-4 border-emerald-500 pr-2">فرع (أ) - علل اثنين مما يأتي: <span class="text-sm font-normal text-slate-500">(10 درجات)</span></p>
+                        <ul class="list-decimal list-inside space-y-2 pr-4 bg-emerald-50 p-4 rounded border border-emerald-200 font-semibold">
+                            <li>تنوع المناخ في محافظة نينوى بين أقسامها الشمالية والجنوبية.</li>
+                            <li>أهمية بناء سد الموصل.</li>
+                            <li>تنوع النشاط الزراعي في المحافظات الشمالية.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-3 text-emerald-900 border-r-4 border-emerald-500 pr-2">فرع (ب) - انسب التضاريس والمعالم الآتية إلى المحافظة التي تقع فيها: <span class="text-sm font-normal text-slate-500">(10 درجات)</span></p>
+                        <div class="bg-emerald-50 p-4 rounded border border-emerald-200 text-center font-bold text-emerald-900 text-xl tracking-wide">
+                            ( سهل السندي ، جبل قنديل ، مدينة الحضر ، جبل بيخير )
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- السؤال الخامس -->
+            <div class="relative bg-white/90 p-4 rounded-lg border border-emerald-100 shadow-sm">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-bold text-xl flex items-center"><span class="question-number text-2xl ml-2">س5/</span> أجب عن الفرعين الآتيين:</h3>
+                    <span class="text-sm font-bold text-emerald-700 border border-emerald-300 px-3 py-1 rounded bg-white shadow-sm">(20 درجة)</span>
+                </div>
+                <div class="pr-8 space-y-6">
+                    <div>
+                        <p class="font-bold mb-3 text-emerald-900 border-r-4 border-emerald-500 pr-2">فرع (أ): <span class="text-sm font-normal text-slate-500">(10 درجات)</span></p>
+                        <div class="bg-teal-50 p-4 rounded border border-teal-200 font-semibold">
+                            ارسم خريطة العراق، موضحاً عليها: (نهر دجلة، الزاب الكبير، محافظة السليمانية، محافظة نينوى).
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-3 text-emerald-900 border-r-4 border-emerald-500 pr-2">فرع (ب): <span class="text-sm font-normal text-slate-500">(10 درجات)</span></p>
+                        <div class="bg-teal-50 p-4 rounded border border-teal-200 leading-relaxed font-semibold">
+                            تحدث عن أهمية (مياه العيون والينابيع) في المحافظات الشمالية (مثل نينوى وأربيل)، وما هي أبرز استخداماتها؟
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-14 text-center text-sm text-emerald-700 font-bold border-t-2 border-emerald-200 pt-6">
+            رسالة للبطلة: "التركيز على مواقع الجبال والمصايف هو مفتاحك للدرجة الكاملة.. بالتوفيق!"
+        </div>
+    </div>
+
+    <!-- قسم الأجوبة النموذجية (مخفي افتراضياً) -->
+    <div id="answers" class="hidden max-w-4xl mx-auto mt-10 bg-white border-t-8 border-emerald-700 p-8 shadow-xl rounded-xl print-break mb-10">
+        <div class="flex justify-between items-center border-b-2 border-emerald-100 pb-5 mb-8">
+            <h2 class="font-black text-3xl text-emerald-900">دليل الأجوبة النموذجية - النسخة ج</h2>
+            <button onclick="hideAnswers()" class="text-gray-500 hover:text-red-500 transition no-print" title="إغلاق الأجوبة">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <div class="space-y-8 text-slate-800">
+            <!-- جواب س1 -->
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-xl text-emerald-900 mb-4 border-r-4 border-emerald-500 pr-3">جواب السؤال الأول (20 درجة - 4 درجات لكل تعريف):</h4>
+                <ul class="list-disc list-inside space-y-3 pr-4 font-medium">
+                    <li><span class="font-bold text-black">الزاب الكبير:</span> هو أحد روافد نهر دجلة، يجري بين محافظتي دهوك وأربيل، ويعد الشريان الحيوي للأنشطة الاقتصادية.</li>
+                    <li><span class="font-bold text-black">قلعة العمادية:</span> من الأماكن الأثرية في محافظة دهوك، سميت بهذا الاسم نسبة إلى مؤسسها عماد الدين زنكي الذي أمر ببنائها.</li>
+                    <li><span class="font-bold text-black">حصاروست:</span> هي من أهم السلاسل الجبلية في محافظة أربيل، وتضم أعلى قمة جبلية في العراق وهي قمة جبل هلكرد (3600م).</li>
+                    <li><span class="font-bold text-black">دور شروكين (خرسباد):</span> هي العاصمة الرابعة للآشوريين في محافظة نينوى، شيدها الملك سرجون الثاني، وهي مربعة تحيط بها أسوار وأبواب.</li>
+                    <li><span class="font-bold text-black">سهل مخمور:</span> هو من أهم السهول في محافظة أربيل ويقع في منطقة السهول والهضاب.</li>
+                    <li><span class="font-bold text-black">موقع نمريك:</span> من المواقع الأثرية القديمة المهمة التي تقع في محافظة دهوك.</li>
+                </ul>
+            </div>
+
+            <!-- جواب س2 -->
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-xl text-emerald-900 mb-4 border-r-4 border-emerald-500 pr-3">جواب السؤال الثاني (20 درجة - 4 درجات لكل فراغ):</h4>
+                <ol class="list-decimal list-inside space-y-2 pr-4 font-bold text-black text-lg">
+                    <li>زاكروس</li>
+                    <li>نهر ديالى (سيروان)</li>
+                    <li>آشور</li>
+                    <li>شبه الصحراوي</li>
+                    <li>جبل حرير</li>
+                    <li>الهضاب والسهول</li>
+                </ol>
+            </div>
+
+            <!-- جواب س3 -->
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-xl text-emerald-900 mb-4 border-r-4 border-emerald-500 pr-3">جواب السؤال الثالث (20 درجة - 4 درجات لكل نقطة):</h4>
+                <ol class="list-decimal list-inside space-y-2 pr-4 font-bold text-black text-lg">
+                    <li>( صح )</li>
+                    <li>( خطأ ) - يقع سد دربندخان على نهر ديالى (سيروان).</li>
+                    <li>( صح )</li>
+                    <li>( صح )</li>
+                    <li>( خطأ ) - توجد مياه سطحية (دجلة والخابور) ومياه عيون وينابيع وثلوج وأمطار.</li>
+                    <li>( خطأ ) - سرسنك وسولاف من مصايف محافظة دهوك وليس أربيل. <span class="text-sm text-emerald-600 font-normal">(هذا فخ لاختبار تركيزها المكاني)</span>.</li>
+                </ol>
+            </div>
+
+            <!-- جواب س4 -->
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-xl text-emerald-900 mb-4 border-r-4 border-emerald-500 pr-3">جواب السؤال الرابع (20 درجة):</h4>
+                
+                <div class="mb-6">
+                    <p class="font-bold text-lg text-emerald-800 mb-3">فرع (أ) - التعاليل (10 درجات - 5 لكل تعليل):</p>
+                    <ol class="list-decimal list-inside space-y-3 pr-4 font-medium">
+                        <li><span class="font-bold text-black">تنوع مناخ نينوى:</span> بسبب سعة مساحة المحافظة وتنوع تضاريسها.</li>
+                        <li><span class="font-bold text-black">أهمية سد الموصل:</span> لخزن المياه وتوليد الطاقة الكهربائية، فضلاً عن كونه منطقة سياحية.</li>
+                        <li><span class="font-bold text-black">تنوع الزراعة بالشمال:</span> بسبب وفرة المياه (أمطار وسطحية وينابيع) وتوفر التربة الخصبة.</li>
+                    </ol>
+                </div>
+
+                <div class="border-t border-slate-300 pt-5">
+                    <p class="font-bold text-lg text-emerald-800 mb-3">فرع (ب) - التنسيب (10 درجات - 2.5 لكل نقطة):</p>
+                    <ul class="space-y-2 pr-4 font-bold text-black">
+                        <li>1- سهل السندي <span class="text-emerald-600 font-normal mx-2"><--</span> محافظة دهوك.</li>
+                        <li>2- جبل قنديل <span class="text-emerald-600 font-normal mx-2"><--</span> محافظة السليمانية.</li>
+                        <li>3- مدينة الحضر <span class="text-emerald-600 font-normal mx-2"><--</span> محافظة نينوى.</li>
+                        <li>4- جبل بيخير <span class="text-emerald-600 font-normal mx-2"><--</span> محافظة دهوك.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- جواب س5 -->
+            <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-xl text-emerald-900 mb-4 border-r-4 border-emerald-500 pr-3">جواب السؤال الخامس (20 درجة):</h4>
+                
+                <div class="mb-6">
+                    <p class="font-bold text-lg text-emerald-800 mb-2">فرع (أ) - الخريطة (10 درجات):</p>
+                    <p class="pr-4 font-medium">ترسم الخريطة مع تأشير <span class="font-bold">نهر دجلة</span>، ورسم <span class="font-bold">الزاب الكبير</span> يتفرع منه بين دهوك وأربيل. تحديد موقع <span class="font-bold">السليمانية</span> (أقصى الشمال الشرقي)، وتحديد موقع <span class="font-bold">نينوى</span> (في الشمال الغربي).</p>
+                </div>
+
+                <div class="border-t border-slate-300 pt-5">
+                    <p class="font-bold text-lg text-emerald-800 mb-2">فرع (ب) - العيون والينابيع (10 درجات):</p>
+                    <p class="pr-4 font-medium mb-2"><span class="font-bold text-black">الأهمية والاستخدامات:</span> تتوزع في مساحات واسعة من المحافظات الشمالية. وتتعدد استعمالاتها بين: <br>1- الاستعمالات الزراعية.<br>2- الاستعمالات الصناعية.<br>3- تشكل موقعاً مهماً للسياحة والاصطياف.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- برمجة نظام الحماية بالرمز السري -->
+    <script>
+        const correctSecret = "1122"; // الرمز السري المطلوب
+        
+        const modal = document.getElementById('authModal');
+        const input = document.getElementById('secretCodeInput');
+        const errorMsg = document.getElementById('errorMsg');
+        const answersDiv = document.getElementById('answers');
+
+        function openAuthModal() {
+            if (answersDiv.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                input.value = '';
+                errorMsg.classList.add('hidden');
+                input.focus();
+            } else {
+                hideAnswers(); // إذا كانت الأجوبة مفتوحة، فإن الزر يقوم بإخفائها مباشرة
+            }
+        }
+
+        function closeAuthModal() {
+            modal.classList.add('hidden');
+        }
+
+        function verifyCode() {
+            if (input.value === correctSecret) {
+                closeAuthModal();
+                answersDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    answersDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                errorMsg.classList.remove('hidden');
+                input.value = ''; // مسح الإدخال الخاطئ
+                input.focus();
+            }
+        }
+
+        function hideAnswers() {
+            answersDiv.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // العودة لأعلى الصفحة
+        }
+
+        // تفعيل مفتاح Enter لسهولة الإدخال
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                verifyCode();
+            }
+        });
+    </script>
 </body>
 </html>
